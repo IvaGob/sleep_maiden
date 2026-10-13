@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:background="#F4F6FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/header_background"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sleep Maiden"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#202B48"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Моніторинг якості сну"
+                android:textSize="16sp"
+                android:textColor="#65718B"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvSensorStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Очікування сенсора..."
+            android:textColor="#375C50"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Показники акселерометра"
+            android:textColor="#202B48"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="X: 0.00 м/с²"
+            android:textColor="#202B48"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/tvY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Y: 0.00 м/с²"
+            android:textColor="#202B48"
+            android:textSize="19sp" />
+
+        <TextView
+            android:id="@+id/tvZ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Z: 0.00 м/с²"
+            android:textColor="#202B48"
+            android:textSize="19sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Нахил за віссю X"
+            android:textColor="#202B48"
+            android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/pbTiltX"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:max="100"
+            android:progress="50"
+            android:progressTint="#6478D8" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="Нахил за віссю Y"
+            android:textColor="#202B48"
+            android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/pbTiltY"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:max="100"
+            android:progress="50"
+            android:progressTint="#6478D8" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="Нахил за віссю Z"
+            android:textColor="#202B48"
+            android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/pbTiltZ"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:max="100"
+            android:progress="50"
+            android:progressTint="#6478D8" />
+
+        <TextView
+            android:id="@+id/tvMotion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Інтенсивність руху: 0%"
+            android:textColor="#202B48"
+            android:textSize="18sp" />
+
+        <ProgressBar
+            android:id="@+id/pbMotion"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="#6478D8" />
+
+        <TextView
+            android:id="@+id/tvActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Стан: очікування даних..."
+            android:textColor="#202B48"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivSleep"
+            android:layout_width="364dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Sleep Tracker Image"
+            android:scaleType="fitCenter"
+            android:src="@drawable/maid_idle" />
+    </LinearLayout>
+</ScrollView>
