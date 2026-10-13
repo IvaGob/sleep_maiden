@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
+import android.content.Intent
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
@@ -64,6 +66,31 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         accelerometer = sensorManager.getDefaultSensor(
             Sensor.TYPE_ACCELEROMETER
         )
+
+        //Створення навігації між екранами
+        val bottomNavigation =
+            findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+        // Поточна сторінка — Головна
+        bottomNavigation.selectedItemId = R.id.nav_home
+
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> true
+
+                R.id.nav_bluetooth -> {
+                    val intent = Intent(
+                        this,
+                        BluetoothActivity::class.java
+                    )
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
+            }
+        }
+
     }
 
     override fun onResume() {
@@ -87,6 +114,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         } else {
             "Акселерометр недоступний"
         }
+
+        findViewById<BottomNavigationView>(
+            R.id.bottomNavigation
+        ).selectedItemId = R.id.nav_home
     }
 
     override fun onPause() {
