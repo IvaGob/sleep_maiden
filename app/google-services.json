@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "845523121737",
+    "project_id": "sleepmaiden",
+    "storage_bucket": "sleepmaiden.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845523121737:android:21f396329640056060f198",
+        "android_client_info": {
+          "package_name": "com.example.sleepmaid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDhDhIneVGtLeniXQBRfflDDmDV3pSFHg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,8 +14,18 @@ import kotlin.math.roundToInt
 import kotlin.math.sqrt
 import android.content.Intent
 import com.google.android.material.bottomnavigation.BottomNavigationView
+//Cloud
+import android.graphics.Color
+import android.widget.Toast
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
+    //cloud
+    private lateinit var cloudViewModel: CloudSyncViewModel
     private lateinit var sensorManager: SensorManager
     private var accelerometer: Sensor? = null
 
@@ -91,6 +101,51 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }
 
+        cloudViewModel = ViewModelProvider(this)[
+            CloudSyncViewModel::class.java
+        ]
+
+        val tvCloudStatus =
+            findViewById<TextView>(R.id.tvCloudStatus)
+
+        var previousCloudStatus: CloudStatus? = null
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                cloudViewModel.uiState.collect { state ->
+
+                    tvCloudStatus.text =
+                        "Хмарна синхронізація: ${state.message}"
+
+                    val color = when (state.status) {
+                        CloudStatus.SYNCED -> Color.rgb(35, 135, 75)
+
+                        CloudStatus.ERROR,
+                        CloudStatus.PENDING -> Color.rgb(190, 45, 55)
+
+                        CloudStatus.SYNCING -> Color.rgb(60, 95, 175)
+
+                        CloudStatus.WAITING -> Color.GRAY
+                    }
+
+                    tvCloudStatus.setTextColor(color)
+
+                    // Повідомлення при втраті з'єднання
+                    if (
+                        state.status == CloudStatus.PENDING &&
+                        previousCloudStatus != CloudStatus.PENDING
+                    ) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Немає з'єднання з Firebase. Дані Pending.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    previousCloudStatus = state.status
+                }
+            }
+        }
     }
 
     override fun onResume() {
@@ -108,6 +163,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 SensorManager.SENSOR_DELAY_UI
             )
         } ?: false
+        //initialize cloud
+        cloudViewModel.startSync()
 
         tvSensorStatus.text = if (registered) {
             "Акселерометр активний"
@@ -125,6 +182,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         // Зупинка сенсора для економії енергії
         sensorManager.unregisterListener(this)
+        cloudViewModel.stopSync()
     }
 
     override fun onSensorChanged(event: SensorEvent) {
@@ -196,6 +254,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
         tvActivity.text = "Стан: $activity"
+
+        //Cloud update
+        cloudViewModel.updateReading(
+            x = x,
+            y = y,
+            z = z,
+            motion = smoothedMotion
+        )
     }
 
     override fun onAccuracyChanged(

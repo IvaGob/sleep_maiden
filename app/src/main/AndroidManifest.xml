@@ -9,6 +9,8 @@
     <uses-permission
         android:name="android.permission.BLUETOOTH_CONNECT" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- Дозволи для Android до API 31 -->
     <uses-permission
         android:name="android.permission.BLUETOOTH"

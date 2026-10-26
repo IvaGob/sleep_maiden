@@ -56,6 +56,18 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tvCloudStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="12dp"
+                android:background="@drawable/header_background"
+                android:text="Хмарна синхронізація: очікування..."
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#65718B" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
